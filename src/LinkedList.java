@@ -13,8 +13,8 @@ public class LinkedList {
         int data;
 
         Node(Node _next, int _data){
-            next = _next;
-            data = _data;
+            this.next = _next;
+            this.data = _data;
         }
     }
 
@@ -38,12 +38,14 @@ public class LinkedList {
      * @param data the integer you want to add to the list
      */
     public void AddFirst(int data){
-        if(head == null){
+        if (head == null)
+        {
             head = new Node(null, data);
             tail = head;
             currentSize++;
         }
-        else{
+        else
+        {
             Node newNode = new Node(head, data);
             head = newNode;
             currentSize++;
@@ -54,12 +56,15 @@ public class LinkedList {
      * Adds an object to the end of the list
      * @param data The integer you want to add to the list
      */
-    public void AddLast(int data){
-        if( head == null){
+    public void AddLast(int data)
+    {
+        if (head == null){
             head = new Node(null,data);
             tail=head;
             currentSize++;
-        } else {
+        }
+        else
+        {
             tail.next = new Node(null, data);
             tail = tail.next;
             currentSize++;
@@ -71,17 +76,24 @@ public class LinkedList {
      * Removes an element at the selected position in the list
      * @param pos The position of the element you want to remove
      */
-    public void RemoveAt(int pos){
+    public void RemoveAt(int pos)
+    {
         Node node = head;
-        if(head == null){
+        if (head == null){
             throw new NoSuchElementException();
-        } else if(pos > currentSize - 1) {
+        } else if (pos > currentSize - 1)
+        {
             throw new IndexOutOfBoundsException();
-        } else if(pos == 0) {
+        }
+        else if (pos == 0)
+        {
             head = head.next;
             currentSize--;
-        } else {
-            for(int i = 0; i < pos - 1; i++){
+        }
+        else
+        {
+            for (int i = 0; i < pos - 1; i++)
+            {
                 node = node.next;
             }
             Node next = node.next.next;
@@ -96,38 +108,45 @@ public class LinkedList {
      * @param pos the position to add the data
      */
     public void InsertAt(int data, int pos){
-        if(pos > currentSize) {
+        if (pos > currentSize)
+        {
             throw new IndexOutOfBoundsException();
         }
-        else if(pos == 0) {
+        else if (pos == 0)
+        {
             Node newNode = new Node(head, data);
             head = newNode;
             currentSize--;
         }
-        else{
-                Node temp = head;
-                for(int i = 0; i < pos - 1; i++){
-                    temp = temp.next;
-                }
-                Node newNode = new Node(temp.next, data);
-                temp.next = newNode;
-                currentSize--;
+        else
+        {
+            Node temp = head;
+            for(int i = 0; i < pos - 1; i++){
+                temp = temp.next;
+            }
+            Node newNode = new Node(temp.next, data);
+            temp.next = newNode;
+            currentSize--;
         }
     }
 
     /**
      * Removes the first element of the list
      */
-    public void RemoveFirst(){
-        if(head == null){
+    public void RemoveFirst()
+    {
+        if (head == null)
+        {
             throw new NoSuchElementException();
         }
-        else if(currentSize == 1){
+        else if (currentSize == 1)
+        {
             head = null;
             tail = null;
             currentSize--;
         }
-        else{
+        else
+        {
             head = head.next;
             currentSize--;
         }
@@ -137,18 +156,22 @@ public class LinkedList {
      * Removes the last element of the list
      */
     public void RemoveLast(){
-        if(head == null){
+        if (head == null)
+        {
             throw new NoSuchElementException();
         }
-        else if(currentSize == 1){
+        else if (currentSize == 1)
+        {
             head = null;
             tail = null;
             currentSize--;
         }
-        else{
+        else
+        {
             Node current = head.next;
             Node previous = head;
-            while(current.next != null) {
+            while (current.next != null)
+            {
                 current = current.next;
                 previous = previous.next;
             }
@@ -161,32 +184,41 @@ public class LinkedList {
     /**
      * @return Returns true or false depending on whether there is a loop in the list or not
      */
-    public Boolean hasLoop(){
-        if(head == null){
-            return false;
+    public Boolean hasLoop()
+    {
+        Boolean isLoop = true;
+        if (head == null)
+        {
+            isLoop = false;
         }
-        else{
+        else
+        {
             Node current = head;
-            for(int i = 0; i < currentSize; i++){
-                if(current.next == null){
-                    return false;
+            for(int i = 0; i < currentSize; i++)
+            {
+                if (current.next == null)
+                {
+                    isLoop = false;
                 }
-                else{
+                else
+                {
                     current = current.next;
                 }
             }
-            return true;
         }
+        return isLoop;
     }
 
     /**
      * Gets the value of the Node at the specified position
      * @param pos The position you want to get data from
-     * @return
+     * @return The data from the node
      */
-    public int GetValue(int pos){
+    public int GetValue(int pos)
+    {
         Node temp = head;
-        for(int i = 0; i < pos; i++){
+        for (int i = 0; i < pos; i++)
+        {
             temp = temp.next;
         }
         return temp.data;
@@ -200,14 +232,15 @@ public class LinkedList {
     public String Print(Boolean ordered)
     {
         Node current = head;
-        if(ordered){
+        if (ordered)
+        {
             int[] unsortedArray = new int[currentSize];
-            for(int i = 0; i <= currentSize - 1; i++){
+            for (int i = 0; i <= currentSize - 1; i++)
+            {
                 unsortedArray[i] = current.data;
                 current = current.next;
             }
             Arrays.sort(unsortedArray);
-
             StringBuilder output = new StringBuilder();
             for (int var : unsortedArray)
             {
@@ -215,9 +248,11 @@ public class LinkedList {
             }
             return output.toString().trim();
         }
-        else{
+        else
+        {
             StringBuilder output = new StringBuilder();
-            while(current != null) {
+            while (current != null)
+            {
                 output.append(current.data).append(" ");
                 current = current.next;
             }
